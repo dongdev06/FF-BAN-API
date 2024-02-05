@@ -1,9 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import requests
 
 app = Flask(__name__)
 
-@app.route('/ban_api/<uid>', methods=['GET'])
+@app.route('/api/ban_check/<uid>', methods=['GET'])
 def check_banned(uid):
     url = f"https://ff.garena.com/api/antihack/check_banned?lang=en&uid={uid}"
 
@@ -32,4 +32,5 @@ def check_banned(uid):
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500  # Return a 500 Internal Server Error on request failure
 
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
