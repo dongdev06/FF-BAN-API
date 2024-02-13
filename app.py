@@ -19,18 +19,17 @@ def check_banned(uid):
         'sec-fetch-dest': "empty",
         'sec-fetch-mode': "cors",
         'sec-fetch-site': "same-origin",
-        'x-requested-with': "B6FksShzIgjfrYImLpTsadjS86sddhFH",
-        'Cookie': "Your cookies here"
+        'x-requested-with': "{my_key}",
+
     }
 
     try:
         response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Check for HTTP errors
+        response.raise_for_status() 
 
         return jsonify(response.json())
 
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500  # Return a 500 Internal Server Error on request failure
+        return jsonify({'error': str(e)}), 500  
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+
