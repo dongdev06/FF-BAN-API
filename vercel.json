@@ -6,7 +6,7 @@
   ],
   "functions": { 
     "api/ban_check/:uid": { 
-      "runtime": "nodejs12.x",
+      "runtime": "nodejs12.2",
       "memory": 512
     }
   }
