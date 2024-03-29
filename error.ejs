@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Redirecting...</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script>
+        function redirectWithCountdown() {
+            var countdown = 7;
+            var countdownElement = document.getElementById('countdown');
+            var intervalId = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                if (countdown === 0) {
+                    clearInterval(intervalId);
+                    window.location.href = "<%= tiktok_url %>";
+                }
+            }, 1000);
+        }
+        window.onload = redirectWithCountdown;
+    </script>
+</head>
+<body>
+    <p>Error : Invalid or Missing Access key.</p>
+    <p>Contact @astute_ff on TikTok to get a key.</p>
+    <p>Redirecting to <a href="<%= tiktok_url %>">@astute_ff</a> in <span id="countdown">7</span> seconds...</p>
+</body>
+</html>
