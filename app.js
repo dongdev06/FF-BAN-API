@@ -4,15 +4,7 @@ const request = require('request');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-const VALID_KEYS = new Set(['RamiyaYT', 'HEX', '444S@URN', 'slffnews']);
-
 app.get('/api/ban_check/:uid', (req, res) => {
-    const api_key = req.query.key;
-
-    if (!api_key || !VALID_KEYS.has(api_key)) {
-        return res.status(403).json({ error: 'Invalid or missing key. Contact @astute_ff on TikTok to get a key' });
-    }
-
     const uid = req.params.uid;
     const url = `https://ff.garena.com/api/antihack/check_banned?lang=en&uid=${uid}`;
 
