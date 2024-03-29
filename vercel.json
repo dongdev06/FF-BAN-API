@@ -1,11 +1,7 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "*", "use": "@vercel/node" }
-  ],
   "routes": [
-    { "handle": "filesystem" },
     { "src": "/api/ban_check/:uid", "dest": "/api/ban_check/:uid" },
-    { "src": "/.*", "dest": "/" }
+    { "src": ".*", "dest": "/app.js" }
   ]
 }
