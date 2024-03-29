@@ -22,14 +22,11 @@ def check_banned(uid):
         'x-requested-with': "{my_key}",
 
     }
-
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status() 
-
         return jsonify(response.json())
-
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500  
+        return jsonify({'error': str(e)}), 500 
 
 
