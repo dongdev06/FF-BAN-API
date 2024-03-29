@@ -1,10 +1,51 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template_string
 import requests
 
 app = Flask(__name__)
 
+VALID_KEYS = {'RamiyaYT', 'HEX','444S@URN','slffnews'}
+
 @app.route('/api/ban_check/<uid>', methods=['GET'])
-def check_banned(uid):
+def check_banned(uid):   
+    api_key = request.args.get('key')
+
+    if not api_key or api_key not in VALID_KEYS:
+
+        return render_template_string("""
+            <html>
+            <head>
+                <title>Redirecting...</title>
+                <style>
+                    body {
+                        background-color: black;
+                        color: white;
+                    }
+                </style>
+                <script>
+                    function redirectWithCountdown() {
+                        var countdown = 7;
+                        var countdownElement = document.getElementById('countdown');
+                        var intervalId = setInterval(function() {
+                            countdown--;
+                            countdownElement.textContent = countdown;
+                            if (countdown === 0) {
+                                clearInterval(intervalId);
+                                window.location.href = "{{ tiktok_url }}";
+                            }
+                        }, 1000);
+                    }
+                    window.onload = redirectWithCountdown;
+                </script>
+            </head>
+            <body>
+                <p>Error : Invalid or Missing Access key.</p>
+                <p>Contact @astute_ff on TikTok to get a key.</p>
+                <p>Redirecting to <a href="{{ tiktok_url }}">@astute_ff</a> in <span id="countdown">7</span> seconds...</p>
+
+            </body>
+            </html>
+        """, tiktok_url="https://www.tiktok.com/@astute_ff")
+
     url = f"https://ff.garena.com/api/antihack/check_banned?lang=en&uid={uid}"
 
     headers = {
@@ -19,14 +60,18 @@ def check_banned(uid):
         'sec-fetch-dest': "empty",
         'sec-fetch-mode': "cors",
         'sec-fetch-site': "same-origin",
-        'x-requested-with': "{my_key}",
-
+        'x-requested-with': "B6FksShzIgjfrYImLpTsadjS86sddhFH",
     }
+
     try:
         response = requests.get(url, headers=headers)
-        response.raise_for_status() 
+        response.raise_for_status()  
+
         return jsonify(response.json())
+
     except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500 
+        # If an error occurs, redirect to TikTok page after 7 seconds
+        return jsonify({'error': 'Invalid or missing key. Contact @astute_ff in TikTok to Get a Key'}), 403
 
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
