@@ -73,5 +73,3 @@ def check_banned(uid):
         # If an error occurs, redirect to TikTok page after 7 seconds
         return jsonify({'error': 'Invalid or missing key. Contact @astute_ff in TikTok to Get a Key'}), 403
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
