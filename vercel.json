@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/ban_check/<uid>": {
-      "runtime": "python3.8"
+      "runtime": "python3.9"
     }
   },
   "routes": [
