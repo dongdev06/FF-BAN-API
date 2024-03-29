@@ -2,6 +2,7 @@
   "version": 2,
   "routes": [
     { "src": "/api/ban_check/:uid", "dest": "/api/ban_check/:uid" },
-    { "src": ".*", "dest": "/app.js" }
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/app.js" }
   ]
 }
