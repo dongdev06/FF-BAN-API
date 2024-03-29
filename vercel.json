@@ -4,5 +4,10 @@
     { "src": "/api/ban_check/:uid", "dest": "/app.js" },
     { "src": "/", "dest": "/app.js" }
   ],
-  "functions": { "api/ban_check/:uid": { "runtime": "nodejs12.x" } }
+  "functions": { 
+    "api/ban_check/:uid": { 
+      "runtime": "nodejs12.x",
+      "memory": 512
+    }
+  }
 }
