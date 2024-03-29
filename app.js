@@ -6,13 +6,11 @@ const PORT = process.env.PORT || 8000;
 
 const VALID_KEYS = new Set(['RamiyaYT', 'HEX', '444S@URN', 'slffnews']);
 
-app.set('view engine', 'ejs');
-
 app.get('/api/ban_check/:uid', (req, res) => {
     const api_key = req.query.key;
 
     if (!api_key || !VALID_KEYS.has(api_key)) {
-        return res.render('error', { tiktok_url: 'https://www.tiktok.com/@astute_ff' });
+        return res.status(403).json({ error: 'Invalid or missing key. Contact @astute_ff on TikTok to get a key' });
     }
 
     const uid = req.params.uid;
@@ -35,14 +33,10 @@ app.get('/api/ban_check/:uid', (req, res) => {
 
     request({ url, headers }, (error, response, body) => {
         if (error) {
-            return res.status(403).json({ error: 'Invalid or missing key. Contact @astute_ff on TikTok to Get a Key' });
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
         res.json(JSON.parse(body));
     });
-});
-
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
 });
 
 app.listen(PORT, () => {
