@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/api/ban_check/:uid", "dest": "/app.js" },
-    { "src": "/", "dest": "/app.js" }
+  "builds": [
+    { "src": "/api/ban_check/:uid", "use": "@vercel/node" },
+    { "src": "/", "use": "@vercel/node" }
   ],
-  "functions": { 
-    "api/ban_check/:uid": { 
-      "runtime": "nodejs12.2",
-      "memory": 512
-    }
-  }
+  "routes": [
+    { "src": "/api/ban_check/:uid", "dest": "/api/ban_check/:uid" },
+    { "src": "/", "dest": "/" }
+  ]
 }
